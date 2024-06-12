@@ -1,41 +1,39 @@
 import pandas as pd
 
 class Database:
-    def __init__(self, stock_file, failure_file, success_file):
-        self.stock_file = stock_file
-        self.failure_file = failure_file
-        self.success_file = success_file
+    def __init__(self):
         self.stock_data = None
         self.failure_data = None
         self.success_data = None
+        self.stock_data_changed = None
 
-    def load_stock_data(self, reset=False):
-        if reset or self.stock_data is None:
-            self.stock_data = pd.read_csv(self.stock_file, sep=';').fillna(0)
+    def load_stock_data(self, file_path):
+        """Loads stock data from a CSV file."""
+        self.stock_data = pd.read_csv(file_path, sep=';').fillna(0)
         return self.stock_data
 
-
-    def load_failure_rates(self):
-        if self.failure_data is None:
-            self.failure_data = pd.read_csv(self.failure_file, sep=';').fillna(0)
+    def load_failure_rates(self, file_path):
+        """Loads failure rates data from a CSV file."""
+        self.failure_data = pd.read_csv(file_path, sep=';').fillna(0)
         return self.failure_data
 
-    def load_success_rates(self):
-        if self.success_data is None:
-            self.success_data = pd.read_csv(self.success_file, sep=';').fillna(0)
+    def load_success_rates(self, file_path):
+        """Loads success rates data from a CSV file."""
+        self.success_data = pd.read_csv(file_path, sep=';').fillna(0)
         return self.success_data
 
     def save_stock_data(self, stock_data, output_file):
-        original_columns = pd.read_csv(self.stock_file, sep=';', nrows=1).columns
-        stock_data[original_columns].to_csv(output_file, sep=';', index=False)
+        """Saves stock data to a CSV file."""
+        stock_data.to_csv(output_file, sep=';', index=False)
 
     def save_failure_data(self, failure_data, output_file):
-        original_columns = pd.read_csv(self.failure_file, sep=';', nrows=1).columns
-        failure_data[original_columns].to_csv(output_file, sep=';', index=False)
+        """Saves failure rates data to a CSV file."""
+        failure_data.to_csv(output_file, sep=';', index=False)
 
     def save_success_data(self, success_data, output_file):
-        original_columns = pd.read_csv(self.success_file, sep=';', nrows=1).columns
-        success_data[original_columns].to_csv(output_file, sep=';', index=False)
+        """Saves success rates data to a CSV file."""
+        success_data.to_csv(output_file, sep=';', index=False)
 
-    def reset_data(self):
-        self.stock_data = None
+    def clear_stock_data(self):
+        """Clears the stock data."""
+        self.stock_data = pd.DataFrame()

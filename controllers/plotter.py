@@ -1,22 +1,28 @@
-# controllers/plotter.py
-
 import matplotlib.pyplot as plt
 import numpy as np
+from PyQt5.QtWidgets import QMessageBox
 
 class Plotter:
     def __init__(self, database):
         self.database = database
 
     def plot_value_change(self, start_year, end_year):
-        stock_data = self.database.load_stock_data()
-        years = [str(year) for year in range(start_year, end_year+1)]
+        """Generates a plot showing the change in stock values from start_year to end_year."""
+        stock_data = self.database.stock_data_changed
+        years = [str(year) for year in range(start_year, end_year + 1)]
+
+        missing_years = [year for year in years if year not in stock_data.columns]
+        if missing_years:
+            QMessageBox.warning(None, "Missing Data", f"Data for years {', '.join(missing_years)} is missing.")
+            return
+
         fig, ax = plt.subplots(figsize=(7, 4))
         bar_width = 0.5
         stacked_values = {year: [0] * len(stock_data['Source']) for year in years}
 
         for i, source in enumerate(stock_data['Source']):
             try:
-                values = [stock_data.loc[stock_data['Source'] == source, year].iloc[0] for year in years]
+                values = [float(stock_data.loc[stock_data['Source'] == source, year].iloc[0]) for year in years]
             except IndexError:
                 print(f"Missing data for source {source} in some years.")
                 values = [0] * len(years)
