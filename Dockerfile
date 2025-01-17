@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
     libxinerama1 \
     libxrandr2 \
     libxrender1 \
-    libxtst6
+    libxtst6 \ 
+    libxcb-cursor0
 
 # Instalacja zależności Pythona
 RUN pip install --upgrade pip
