@@ -24,6 +24,8 @@ RUN apt-get update && apt-get install -y \
     libxtst6 \ 
     libxcb-cursor0 \ 
     libxcb-xinerama0
+    
+RUN yum -y install mesa-libGL
 
 # Instalacja zależności Pythona
 RUN pip install --upgrade pip
