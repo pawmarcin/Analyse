@@ -8,25 +8,11 @@ COPY . .
 
 # Instalacja zależności systemowych
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
-    libx11-xcb1 \
-    libxcb1 \
-    libxcomposite1 \
-    libxcursor1 \
-    libxdamage1 \
-    libxext6 \
-    libxfixes3 \
-    libxi6 \
-    libxinerama1 \
-    libxrandr2 \
-    libxrender1 \
-    libxtst6 \ 
-    libxcb-cursor0 \ 
-    libxcb-xinerama0 
-    
+    libgl1-mesa-glx libglib2.0-0 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 \
+    libxext6 libxfixes3 libxi6 libxinerama1 libxrandr2 libxrender1 libxtst6 libxcb-cursor0 libxcb-xinerama0 \
+    && rm -rf /var/lib/apt/lists/*
 
-# Instalacja zależności Pythona
+# Aktualizacja pip i instalacja zależności Pythona
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
