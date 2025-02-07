@@ -8,7 +8,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx libglib2.0-0 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 \
     libxext6 libxfixes3 libxi6 libxinerama1 libxrandr2 libxrender1 libxtst6 libxcb-cursor0 libxcb-xinerama0 \
-    libxcb-1-0 libdbus-1-3 libfontconfig1 libxkbcommon-x11-0 opencv-python-headless \
+    libxcb-1-0 libdbus-1-3 libfontconfig1 libxkbcommon-x11-0 opencv-python-headless pyqt6 \
     && rm -rf /var/lib/apt/lists/*
 
 # Aktualizacja pip
