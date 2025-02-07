@@ -26,17 +26,10 @@ RUN apt-get update && apt-get install -y \
     libfreetype6 \
     libdbus-1-3 \
     libxext6 \
-    qt5-default \
     qt5-qmake \
     qtbase5-dev-tools \
     qtchooser \
     qtmultimedia5-dev \
-    libqt5multimedia5-plugins \
-    libqt5multimedia5 \
-    libqt5multimediawidgets5 \
-    libqt5multimediaquick5 \
-    libqt5multimediaquick-p5 \
-    libqt5multimediagsttools5 \
     && rm -rf /var/lib/apt/lists/*
     
 # Tworzenie i ustawienie katalogu dla konfiguracji Matplotlib
