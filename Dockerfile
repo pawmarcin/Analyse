@@ -3,7 +3,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Instalacja zależności systemowych dla Matplotlib i Qt
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && apt-get install -y \
     libgl1-mesa-glx libglib2.0-0 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 \
     libxext6 libxfixes3 libxi6 libxinerama1 libxrandr2 libxrender1 libxtst6 libxcb-cursor0 libxcb-xinerama0 \
     libdbus-1-3 libfontconfig1 libxkbcommon-x11-0 libxcb libqxcb \
