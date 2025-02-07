@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
 # Tworzenie i ustawienie katalogu dla konfiguracji Matplotlib
 RUN mkdir -p /app/matplotlib_config
 RUN chmod -R 777 /app/matplotlib_config
-ENV MPLCONFIGDIR=/app/matplotlib_config
 
 # Aktualizacja pip i instalacja zależności Pythona
 COPY requirements.txt .
