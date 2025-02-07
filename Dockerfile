@@ -1,10 +1,8 @@
+# Użyj oficjalnego obrazu Pythona w wersji slim
 FROM python:3.10-slim
 
 # Ustawienie katalogu roboczego
 WORKDIR /app
-
-# Kopiowanie plików projektu
-COPY . .
 
 # Instalacja zależności systemowych
 RUN apt-get update && apt-get install -y \
@@ -12,16 +10,19 @@ RUN apt-get update && apt-get install -y \
     libxext6 libxfixes3 libxi6 libxinerama1 libxrandr2 libxrender1 libxtst6 libxcb-cursor0 libxcb-xinerama0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Aktualizacja pip i instalacja zależności Pythona
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Kopiowanie tylko pliku requirements.txt najpierw, aby skorzystać z cache Docker
+COPY requirements.txt .
+# Aktualizacja pip i instalacja zależności Pythona z pliku requirements.txt
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
-# Utworzenie zapisywalnego katalogu
-RUN mkdir -p /path/to/writable/directory
-RUN chmod u+w /path/to/writable/directory
+# Kopiowanie reszty plików projektu
+COPY . .
 
+# Utworzenie zapisywalnego katalogu dla Matplotlib
+RUN mkdir -p /app/matplotlib_config && chmod u+w /app/matplotlib_config
 # Ustawienie zmiennej środowiskowej dla Matplotlib
-ENV MPLCONFIGDIR=/path/to/writable/directory
+ENV MPLCONFIGDIR=/app/matplotlib_config
 
 # Uruchomienie aplikacji
 CMD ["python", "main.py"]
