@@ -15,6 +15,12 @@ RUN mkdir -p /app/matplotlib_config
 RUN chmod -R 777 /app/matplotlib_config
 ENV MPLCONFIGDIR=/app/matplotlib_config
 
+ENV QT_DEBUG_PLUGINS=1
+ENV QT_QPA_PLATFORM=xcb
+ENV QT_QPA_PLATFORM_PLUGIN_PATH=/opt/Qt/${QT_VERSION}/gcc_64/plugins
+ENV QT_PLUGIN_PATH=/opt/Qt/${QT_VERSION}/gcc_64/plugins
+ENV DISPLAY=:1
+
 # Aktualizacja pip i instalacja zależności Pythona
 COPY requirements.txt .
 RUN pip install --upgrade pip
