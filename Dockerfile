@@ -11,8 +11,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalacja zależności Pythona
-RUN pip install --upgrade pip \
-    && pip install opencv-python-headless pyqt6
+RUN pip install --upgrade 
 
 # Kopiowanie plików aplikacji
 COPY . .
