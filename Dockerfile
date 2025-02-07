@@ -10,11 +10,13 @@ RUN apt-get update && apt-get install -y \
     libxext6 libxfixes3 libxi6 libxinerama1 libxrandr2 libxrender1 libxtst6 libxcb-cursor0 libxcb-xinerama0 \
     && rm -rf /var/lib/apt/lists/*
 
+# Aktualizacja pip
+RUN pip install --upgrade pip
+
 # Kopiowanie tylko pliku requirements.txt najpierw, aby skorzystać z cache Docker
 COPY requirements.txt .
-# Aktualizacja pip i instalacja zależności Pythona z pliku requirements.txt
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+# Instalacja zależności Pythona z pliku requirements.txt
+RUN pip install -r requirements.txt
 
 # Kopiowanie reszty plików projektu
 COPY . .
