@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y \
     libqt5multimediaquick-p5 \
     libqt5multimediagsttools5 \
     && rm -rf /var/lib/apt/lists/*
-
+    
 # Tworzenie i ustawienie katalogu dla konfiguracji Matplotlib
 RUN mkdir -p /app/matplotlib_config
 RUN chmod -R 777 /app/matplotlib_config
